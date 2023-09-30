@@ -1,0 +1,17 @@
+.button {
+    margin-top: 10px;
+}
+
+.email {
+    margin-right: 10px;
+}
+
+.email, .pass_lk {
+    width: 25%;
+    /* height: 20px; */
+}
+
+.back-div {
+    margin-left: 90%;
+
+}
