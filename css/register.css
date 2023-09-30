@@ -1,0 +1,19 @@
+#main {
+    margin-top: 6%;
+}
+
+#submit{
+    margin-top: 10px;
+}
+
+.checkbox{
+    /* Если раскомментировать, то падает текст в input полях */
+    /* float: left; */
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+    cursor: pointer;
+}
+
+.email, .pass1, .pass2, .name{
+    margin-bottom: 3%;
+}
