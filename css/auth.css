@@ -1,5 +1,5 @@
 #main {
-    margin-top: 15%;
+    margin-top: 10%;
 }
 
 #submit{
@@ -11,4 +11,9 @@
     /* float: left; */
     /* margin-top: 10px; */
     /* margin-bottom: 10px; */
+    cursor: pointer;
+}
+
+.email, .pass1, .pass2, .name{
+    margin-bottom: 3%;
 }
