@@ -3,53 +3,85 @@
 </head>
 <?php
 
-if(!empty($_GET['title'])){
-$fp = fopen('news.txt', 'a');
-$text = $_GET['title'].';'.
-		$_GET['content'].';'.
-		date("d.m.Y", time())."\n";
-		
-$result = fwrite($fp, $text);
-if ($result)
-	echo "Новость успешно добавлена";
-fclose ($fp);
+if(!empty($_GET['title']) && !empty($_GET['content'])){
+    $fp = fopen('/var/www/html/news/news.txt', 'a+');
+    $text = $_GET['title'].';'.
+            $_GET['content'].';'.
+            date("d.m.Y", time())."\n";
+            
+    $result = fwrite($fp, $text);
+    if ($result){
+        echo "<div class=\"alert alert-success container text-center col-md-2 p-2 \" role=\"alert\"> Новость успешно добавлена! 
+            <button type=\"button\" class=\"btn-close\" disabled aria-label=\"Close\"></button>
+            </div>";
+    }
+
+    else{
+        echo "<div class=\"alert alert-danger container text-center col-md-2 p-2 \" role=\"alert\"> Ошибка!
+            <button type=\"button\" class=\"btn-close\" disabled aria-label=\"Close\"></button>
+            </div>";
+    }
+    fclose ($fp);
 }
+
+if (empty($_GET['title'])){
+
+    echo "<div class=\"alert alert-danger container text-center col-md-2 p-2 \" role=\"alert\"> Введите заголовок!
+            <button type=\"button\" class=\"btn-close\" aria-label=\"Close\"></button>
+            </div>";
+}
+
+if (empty($_GET['content'])){
+
+    echo "<div id=\"liveAlertPlaceholder\"></div>
+        ";
+}
+
 ?>
 
 <form method="GET"> 
 
+    <h1 class="container text-center mt-3" style="margin-bottom: 5%">Создание новости</h1>
 
-<!-- Поле ввода заголовка -->
-<p>
-    <div class="form-group; row" style="margin-left: 10px;">
-
-        <div class="name; col-md-7">
-
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Введите заголовок" name="title" style="margin-top: 25px; margin-left: 325px;">    
-
-        </div>
-
+    <!-- Поле ввода заголовка -->
+    <div class="mb-5 container text-center col-md-5">
+        <h5>Заголовок:</h5>
+        <textarea type="text" id="floatingInput" name='title' class="form-control" placeholder="Просто начни писать" rows=1></textarea>
     </div>
-</p>
-
-<br>
 
 
-<!-- Поле ввода текста -->
-<p>
-	<div class="form-group; row" style="margin-top: -25px; margin-left: 400px;">
-		<div class="col-md-8">
-			<textarea class="form-control" id="exampleTextarea" name="content" rows="3"></textarea>
-		</div>
-	</div>
-</p>
+    <!-- Поле ввода текста -->
+    <div class="container text-center col-md-8 mb-5">
+        <h5>Текст:</h5>        
+        <textarea rows=5 class="form-control" name='content' placeholder="Просто начни писать" id="floatingTextarea"></textarea>
+    </div>
 
+    <div class="d-grid gap-2 col-4 mx-auto">
+        <!-- <button class="btn btn-primary" id='liveAlertPlaceholder' type="submit">Записать!</button> -->
+        <button class="btn btn-primary" id="liveAlertBtn" type="submit">Записать!</button>
+        <button class="btn btn-primary" type="button">Назад</button>
+    </div>
 
-	<!-- Кнопка, которая создает новость -->
-	<div class="row">
-        <button type="submit" class="btn btn-primary" value="Создать новость" style="margin-left: 400px;">Создать новость</button>
-        <!-- кнопка возвращающая назад -->
-        <a href="index.php" class="btn btn-primary" style="margin-left: 800px;">На главную</a>
-
-	</div>
 </form>
+
+<script>
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+    const appendAlert = (message, type) => {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+        `<div class="container text-center col-md-4 p-2 alert alert-${type} alert-dismissible" role="alert">`,
+        `   <div>${message}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+    ].join('')
+
+    alertPlaceholder.append(wrapper)
+    }
+
+    const alertTrigger = document.getElementById('liveAlertBtn')
+    if (alertTrigger) {
+    alertTrigger.addEventListener('click', () => {
+        appendAlert('Nice, you triggered this alert message!', 'success')
+    })
+    }
+</script>

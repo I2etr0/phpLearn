@@ -60,7 +60,10 @@ if (isset($_GET)){
         case 'lk':
             include_once 'pages/lk.php';
         break;
-
+        
+        case 'addNews':
+            include_once 'pages/addNews.php';
+        break;
         
     
     }
