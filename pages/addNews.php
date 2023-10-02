@@ -1,5 +1,10 @@
 <?php 
+
 include_once '/var/www/html/includes/header.php';
+
+ini_set('display_errors', 1); 
+ini_set('display_startup_errors', 1); 
+error_reporting(E_ALL);
 ?>
 
 <head>
@@ -8,12 +13,13 @@ include_once '/var/www/html/includes/header.php';
 <?php
 
 if(!empty($_POST['title']) && !empty($_POST['content'])){
-    $fp = fopen('/var/www/html/news/news.txt', 'a+');
+    $fp = fopen('news.txt', 'w');
     $text = $_POST['title'].';'.
             $_POST['content'].';'.
             date("d.m.Y", time())."\n";
             
     $result = fwrite($fp, $text);
+
     if ($result){
         echo "<div class=\"alert alert-success container text-center col-md-2 p-2 \" role=\"alert\"> Новость успешно добавлена! 
             <button type=\"button\" class=\"btn-close\" disabled aria-label=\"Close\"></button>
@@ -25,25 +31,12 @@ if(!empty($_POST['title']) && !empty($_POST['content'])){
             <button type=\"button\" class=\"btn-close\" disabled aria-label=\"Close\"></button>
             </div>";
     }
+
     fclose ($fp);
 }
-
-if (empty($_POST['title'])){
-
-    echo "<div class=\"alert alert-danger container text-center col-md-2 p-2 \" role=\"alert\"> Введите заголовок!
-            <button type=\"button\" class=\"btn-close\" aria-label=\"Close\"></button>
-            </div>";
-}
-
-if (empty($_POST['content'])){
-
-    echo "<div id=\"liveAlertPlaceholder\"></div>
-        ";
-}
-
 ?>
 
-<form method="GET"> 
+<form method="post" action=""> 
 
     <h1 class="container text-center mt-3" style="margin-bottom: 5%">Создание новости</h1>
 
@@ -57,18 +50,18 @@ if (empty($_POST['content'])){
     <!-- Поле ввода текста -->
     <div class="container text-center col-md-8 mb-5">
         <h5>Текст:</h5>        
-        <textarea rows=5 class="form-control" name='content' placeholder="Просто начни писать" id="floatingTextarea"></textarea>
+        <textarea rows=5 class="form-control" name='content' placeholder="Просто начни писать" id="floatingTextarea" require></textarea>
     </div>
 
     <div class="d-grid gap-2 col-4 mx-auto">
-        <!-- <button class="btn btn-primary" id='liveAlertPlaceholder' type="submit">Записать!</button> -->
-        <button class="btn btn-primary" id="liveAlertBtn" type="submit">Записать!</button>
+        <button class="btn btn-primary" id='liveAlertPlaceholder' type="submit">Записать!</button>
+        <!-- <button class="btn btn-primary" id="liveAlertBtn" type="submit">Записать!</button> -->
         <button class="btn btn-primary" type="button">Назад</button>
     </div>
 
 </form>
 
-<script>
+<!-- <script>
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     const appendAlert = (message, type) => {
     const wrapper = document.createElement('div')
@@ -88,4 +81,4 @@ if (empty($_POST['content'])){
         appendAlert('Nice, you triggered this alert message!', 'success')
     })
     }
-</script>
+</script> -->
