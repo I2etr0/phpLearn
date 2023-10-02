@@ -1,6 +1,10 @@
+<?php 
+include_once '/var/www/html/includes/header.php';
+?>
+
 <head>
-    <link rel="stylesheet" href="css/register.css">
-    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/auth.css">
     <title>Личный кабинет</title>
 </head>
 

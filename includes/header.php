@@ -17,56 +17,19 @@
     <ul class="nav justify-content-center">
         
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="?">Главная</a>
+            <a class="nav-link active" aria-current="page" href="/index.php">Главная</a>
         </li>
         
         <li class="nav-item">
-            <a class="nav-link" href="?page=blog">Блог</a>
+            <a class="nav-link" href="/pages/blog.php">Блог</a>
         </li>
         
         <li class="nav-item">
-            <a class="nav-link" href="?page=auth">Личный кабинет</a>
+            <a class="nav-link" href="/pages/auth.php">Личный кабинет</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="?page=register">Регистрация</a>
+            <a class="nav-link" href="/pages/register.php">Регистрация</a>
         </li>
 
     </ul>
-
-
-<!-- Скрипт для сокращения ссылки -->
-<?php
-$page = $_GET['page']; 
-
-if (isset($_GET)){
-    switch ($_GET['page']) {
-        default:
-            include_once 'pages/main.php';
-        break;
-    
-        case 'register':
-            include_once "pages/register.php";
-        break;
-
-        case 'blog':
-            include_once "pages/blog.php";
-        break;
-
-        case 'auth':
-            include_once 'pages/auth.php';
-        break;
-
-        case 'lk':
-            include_once 'pages/lk.php';
-        break;
-        
-        case 'addNews':
-            include_once 'pages/addNews.php';
-        break;
-        
-    
-    }
-}
-
-?>

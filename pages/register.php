@@ -1,5 +1,9 @@
+<?php 
+include_once '/var/www/html/includes/header.php';
+?>
+
 <head>
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="/css/register.css">
     <title>Регистрация</title>
 </head>
 

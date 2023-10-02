@@ -1,12 +1,16 @@
+<?php 
+include_once '/var/www/html/includes/header.php';
+?>
+
 <head>
     <title>Редактор новостей</title>
 </head>
 <?php
 
-if(!empty($_GET['title']) && !empty($_GET['content'])){
+if(!empty($_POST['title']) && !empty($_POST['content'])){
     $fp = fopen('/var/www/html/news/news.txt', 'a+');
-    $text = $_GET['title'].';'.
-            $_GET['content'].';'.
+    $text = $_POST['title'].';'.
+            $_POST['content'].';'.
             date("d.m.Y", time())."\n";
             
     $result = fwrite($fp, $text);
@@ -24,14 +28,14 @@ if(!empty($_GET['title']) && !empty($_GET['content'])){
     fclose ($fp);
 }
 
-if (empty($_GET['title'])){
+if (empty($_POST['title'])){
 
     echo "<div class=\"alert alert-danger container text-center col-md-2 p-2 \" role=\"alert\"> Введите заголовок!
             <button type=\"button\" class=\"btn-close\" aria-label=\"Close\"></button>
             </div>";
 }
 
-if (empty($_GET['content'])){
+if (empty($_POST['content'])){
 
     echo "<div id=\"liveAlertPlaceholder\"></div>
         ";
